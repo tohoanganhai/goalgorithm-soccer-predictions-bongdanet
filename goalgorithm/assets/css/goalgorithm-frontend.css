@@ -1,0 +1,204 @@
+/* === GoalGorithm Prediction Card === */
+.goalgorithm-card {
+	max-width: 600px;
+	margin: 20px auto;
+	border: 1px solid #e0e0e0;
+	border-radius: 12px;
+	overflow: hidden;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	background: #fff;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Header */
+.goalgorithm-header {
+	background: linear-gradient(135deg, #1a1a2e, #16213e);
+	color: #fff;
+	padding: 20px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+}
+.goalgorithm-team {
+	font-size: 1.2em;
+	font-weight: 700;
+}
+.goalgorithm-vs {
+	font-size: 0.9em;
+	opacity: 0.7;
+	text-transform: uppercase;
+}
+
+/* Expected Goals */
+.goalgorithm-xg {
+	padding: 16px 20px;
+	text-align: center;
+	background: #f8f9fa;
+	border-bottom: 1px solid #e0e0e0;
+}
+.goalgorithm-xg-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+}
+.goalgorithm-xg-label {
+	font-size: 0.85em;
+	color: #666;
+	margin-right: 8px;
+}
+.goalgorithm-xg-value {
+	font-size: 1.8em;
+	font-weight: 700;
+	color: #1a1a2e;
+}
+.goalgorithm-xg-separator {
+	font-size: 1.4em;
+	color: #999;
+}
+
+/* Outcome Bar */
+.goalgorithm-outcomes {
+	padding: 16px 20px;
+}
+.goalgorithm-outcome-labels {
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.85em;
+	margin-bottom: 8px;
+	color: #333;
+}
+.goalgorithm-outcome-bar {
+	display: flex;
+	height: 12px;
+	border-radius: 6px;
+	overflow: hidden;
+}
+.goalgorithm-bar-home {
+	background: #2ecc71;
+}
+.goalgorithm-bar-draw {
+	background: #95a5a6;
+}
+.goalgorithm-bar-away {
+	background: #e74c3c;
+}
+
+/* Markets */
+.goalgorithm-markets {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+	padding: 16px 20px;
+	border-top: 1px solid #e0e0e0;
+}
+.goalgorithm-market {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px 12px;
+	background: #f8f9fa;
+	border-radius: 6px;
+}
+.goalgorithm-market-label {
+	font-size: 0.85em;
+	color: #666;
+}
+.goalgorithm-market-value {
+	font-weight: 700;
+	color: #1a1a2e;
+}
+
+/* Top Scores */
+.goalgorithm-top-scores {
+	padding: 16px 20px;
+	border-top: 1px solid #e0e0e0;
+}
+.goalgorithm-section-title {
+	font-size: 0.9em;
+	font-weight: 700;
+	color: #333;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+.goalgorithm-score-item {
+	display: flex;
+	justify-content: space-between;
+	padding: 6px 0;
+	border-bottom: 1px solid #f0f0f0;
+}
+.goalgorithm-score-item:last-child {
+	border-bottom: none;
+}
+.goalgorithm-score {
+	font-weight: 600;
+}
+.goalgorithm-score-pct {
+	color: #1a1a2e;
+	font-weight: 700;
+}
+
+/* Score Grid */
+.goalgorithm-grid-section {
+	padding: 16px 20px;
+	border-top: 1px solid #e0e0e0;
+}
+.goalgorithm-grid {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.8em;
+	text-align: center;
+}
+.goalgorithm-grid th {
+	padding: 6px;
+	background: #f8f9fa;
+	font-weight: 700;
+	color: #333;
+}
+.goalgorithm-grid td {
+	padding: 6px;
+	border: 1px solid #e8e8e8;
+}
+
+/* Heatmap intensities */
+.goalgorithm-heat-0 { background: #fff; }
+.goalgorithm-heat-1 { background: #e8f5e9; }
+.goalgorithm-heat-2 { background: #c8e6c9; }
+.goalgorithm-heat-3 { background: #a5d6a7; }
+.goalgorithm-heat-4 { background: #81c784; }
+.goalgorithm-heat-5 { background: #66bb6a; color: #fff; }
+
+/* Error */
+.goalgorithm-error {
+	max-width: 600px;
+	margin: 20px auto;
+	padding: 16px 20px;
+	background: #fff3cd;
+	border: 1px solid #ffc107;
+	border-radius: 8px;
+	color: #856404;
+	font-size: 0.9em;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+	.goalgorithm-header {
+		flex-direction: column;
+		gap: 8px;
+	}
+	.goalgorithm-team {
+		font-size: 1em;
+	}
+	.goalgorithm-markets {
+		grid-template-columns: 1fr;
+	}
+	.goalgorithm-grid {
+		font-size: 0.7em;
+	}
+	.goalgorithm-grid td,
+	.goalgorithm-grid th {
+		padding: 4px;
+	}
+}
