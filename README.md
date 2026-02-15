@@ -4,14 +4,14 @@ WordPress plugin that uses Expected Goals (xG) data and Poisson distribution to 
 
 ## Features
 
-- Scrapes xG/xGA data from [FBref.com](https://fbref.com)
+- Fetches xG/xGA data from [Understat.com](https://understat.com) JSON API
 - Poisson distribution model for match outcome probabilities
 - `[goalgorithm]` shortcode with styled prediction card
 - Win/Draw/Loss, Over/Under 2.5, BTTS probabilities
 - 6x6 score probability heatmap grid
 - Top 3 most likely exact scores
 - Admin settings page with cache management
-- Supports 6 leagues: Premier League, La Liga, Serie A, Bundesliga, Ligue 1, MLS
+- Supports 5 leagues: Premier League, La Liga, Serie A, Bundesliga, Ligue 1
 
 ## Installation
 
@@ -36,11 +36,10 @@ WordPress plugin that uses Expected Goals (xG) data and Poisson distribution to 
 | 11 | Serie A |
 | 20 | Bundesliga |
 | 13 | Ligue 1 |
-| 22 | MLS |
 
 ## How It Works
 
-1. **Data Collection**: Fetches squad xG/xGA stats from FBref.com
+1. **Data Collection**: Fetches team xG/xGA stats from Understat.com JSON API
 2. **Strength Calculation**: Computes attack/defense strength relative to league average
 3. **Expected Goals**: `HomeXG = HomeAttack * AwayDefense * LeagueAvg`
 4. **Poisson Distribution**: Calculates probability of each team scoring 0-5 goals
@@ -51,7 +50,6 @@ WordPress plugin that uses Expected Goals (xG) data and Poisson distribution to 
 
 - WordPress 5.0+
 - PHP 7.4+
-- DOMDocument PHP extension
 
 ## File Structure
 
@@ -59,8 +57,7 @@ WordPress plugin that uses Expected Goals (xG) data and Poisson distribution to 
 goalgorithm/
 ├── goalgorithm.php                    # Main plugin bootstrap
 ├── includes/
-│   ├── class-fbref-html-parser.php    # FBref HTML parsing
-│   ├── class-data-fetcher.php         # HTTP fetching + caching
+│   ├── class-data-fetcher.php         # Understat API fetching + caching
 │   ├── class-prediction-engine.php    # Poisson math engine
 │   ├── class-shortcode-renderer.php   # Shortcode HTML output
 │   └── class-admin-settings.php       # Admin settings page

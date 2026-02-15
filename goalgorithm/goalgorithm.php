@@ -3,7 +3,7 @@
  * Plugin Name: GoalGorithm - Soccer Predictions
  * Plugin URI:  https://github.com/goalgorithm
  * Description: xG-based soccer match predictions using Poisson distribution model. Use [goalgorithm] shortcode.
- * Version:     1.0.0
+ * Version:     1.1.0
  * Author:      GoalGorithm
  * License:     GPL v2 or later
  * Text Domain: goalgorithm
@@ -15,13 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Plugin constants
 if ( ! defined( 'GOALGORITHM_VERSION' ) ) {
-	define( 'GOALGORITHM_VERSION', '1.0.0' );
+	define( 'GOALGORITHM_VERSION', '1.1.0' );
 	define( 'GOALGORITHM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 	define( 'GOALGORITHM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
 
 // Load dependencies
-require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-fbref-html-parser.php';
 require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-data-fetcher.php';
 require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-prediction-engine.php';
 require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-shortcode-renderer.php';
@@ -82,8 +81,8 @@ class GoalGorithm {
 
 // Activation: set default options
 register_activation_hook( __FILE__, function () {
-	add_option( 'goalgorithm_default_league', '9' );   // Premier League
-	add_option( 'goalgorithm_cache_duration', '12' );   // 12 hours
+	add_option( 'goalgorithm_default_league', '9' );    // Premier League
+	add_option( 'goalgorithm_cache_duration', '12' );  // 12 hours
 } );
 
 // Deactivation: clean up transients

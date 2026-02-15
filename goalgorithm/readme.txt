@@ -4,7 +4,7 @@ Tags: soccer, football, predictions, xg, poisson, betting, statistics
 Requires at least: 5.0
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ xG-based soccer match predictions using Poisson distribution model via shortcode
 
 == Description ==
 
-GoalGorithm uses Expected Goals (xG) data from FBref.com and the Poisson distribution to generate soccer match predictions. Simply add a shortcode to any page or post to display:
+GoalGorithm uses Expected Goals (xG) data from Understat.com and the Poisson distribution to generate soccer match predictions. Simply add a shortcode to any page or post to display:
 
 * Expected goals for each team
 * Win/Draw/Loss probabilities
@@ -28,7 +28,6 @@ GoalGorithm uses Expected Goals (xG) data from FBref.com and the Poisson distrib
 * Serie A
 * Bundesliga
 * Ligue 1
-* MLS
 
 == Installation ==
 
@@ -51,14 +50,17 @@ GoalGorithm uses Expected Goals (xG) data from FBref.com and the Poisson distrib
 * 11 = Serie A
 * 20 = Bundesliga
 * 13 = Ligue 1
-* 22 = MLS
 
 == Changelog ==
 
+= 1.1.0 =
+* Switch data source from FBref to Understat.com JSON API
+* Fix Cloudflare 403 blocking issue with FBref scraping
+* Remove MLS (not available on Understat)
+* Remove DOMDocument dependency (no longer parsing HTML)
+
 = 1.0.0 =
 * Initial release
-* xG data fetching from FBref.com
 * Poisson distribution prediction engine
 * Shortcode with styled prediction card
 * Admin settings page with cache management
-* Support for 6 major leagues

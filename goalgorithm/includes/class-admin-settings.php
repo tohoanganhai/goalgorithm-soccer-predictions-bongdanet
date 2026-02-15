@@ -75,7 +75,7 @@ class GoalGorithm_Admin_Settings {
 		$value = get_option( 'goalgorithm_cache_duration', 12 );
 		echo '<input type="number" name="goalgorithm_cache_duration" '
 			. 'value="' . esc_attr( $value ) . '" min="1" max="72" step="1" />'
-			. '<p class="description">How long to cache FBRef data (1-72 hours). Default: 12.</p>';
+			. '<p class="description">How long to cache Understat data (1-72 hours). Default: 12.</p>';
 	}
 
 	/** Render the full settings page with form and data management. */
@@ -98,7 +98,7 @@ class GoalGorithm_Admin_Settings {
 
 		// Manual refresh section
 		echo '<hr /><h2>Data Management</h2>';
-		echo '<p>Manually refresh cached league data from FBRef.</p>';
+		echo '<p>Manually refresh cached league data from Understat.</p>';
 		echo '<form method="post">';
 		wp_nonce_field( 'goalgorithm_refresh', 'goalgorithm_refresh_nonce' );
 
@@ -148,7 +148,7 @@ class GoalGorithm_Admin_Settings {
 					add_settings_error( self::PAGE_SLUG, 'refresh_error',
 						'Error refreshing league ' . $id . ': ' . $result->get_error_message(), 'error' );
 				}
-				sleep( 3 ); // Rate limit between requests
+				sleep( 1 ); // Brief pause between requests
 			}
 			add_settings_error( self::PAGE_SLUG, 'refresh_ok', 'All leagues refreshed.', 'success' );
 		} else {
@@ -171,8 +171,12 @@ class GoalGorithm_Admin_Settings {
 		echo '<th>League</th><th>Status</th><th>Teams</th>';
 		echo '</tr></thead><tbody>';
 
+		$month  = (int) gmdate( 'n' );
+		$year   = (int) gmdate( 'Y' );
+		$season = ( $month >= 8 ) ? $year : $year - 1;
+
 		foreach ( GoalGorithm_Data_Fetcher::LEAGUES as $id => $name ) {
-			$cached = get_transient( 'goalgorithm_league_' . $id );
+			$cached = get_transient( 'goalgorithm_league_' . $id . '_' . $season );
 			$status = ( false !== $cached ) ? 'Cached' : 'Not cached';
 			$count  = is_array( $cached ) ? count( $cached ) : 0;
 
