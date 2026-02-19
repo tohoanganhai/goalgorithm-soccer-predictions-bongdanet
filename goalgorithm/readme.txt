@@ -48,6 +48,10 @@ This plugin connects to the following external service:
 * **Terms of Service:** [https://understat.com](https://understat.com)
 * **Privacy Policy:** Understat.com does not publish a separate privacy policy. The plugin does not send any user data to this service.
 
+== Attribution Link ==
+
+Both shortcodes display a small credit line at the bottom of the output linking to [BongdaNET](https://bongdanet66.com/). This link opens in a new tab and is visible to site visitors. It credits the prediction model author and source website.
+
 == Installation ==
 
 1. Upload the `goalgorithm` folder to `/wp-content/plugins/`
