@@ -23,6 +23,7 @@ if ( ! defined( 'GOALGORITHM_VERSION' ) ) {
 // Load dependencies
 require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-data-fetcher.php';
 require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-prediction-engine.php';
+require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-translations.php';
 require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-shortcode-renderer.php';
 require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-league-table-renderer.php';
 require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-admin-settings.php';

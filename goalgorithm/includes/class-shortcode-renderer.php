@@ -66,7 +66,7 @@ class GoalGorithm_Shortcode_Renderer {
 		$html .= $this->render_markets( $p );
 		$html .= $this->render_top_scores( $p );
 		$html .= $this->render_score_grid( $p );
-		$html .= '<div class="gg-signature">Dự đoán bóng đá AI bởi Tô Hoàng Anh — <a href="https://bongdanet66.com/" target="_blank" rel="noopener">BongdaNET</a></div>';
+		$html .= '<div class="gg-signature">' . esc_html( GoalGorithm_Translations::get( 'signature' ) ) . ' <a href="https://bongdanet66.com/" target="_blank" rel="noopener">BongdaNET</a></div>';
 		$html .= '</div>';
 		return $html;
 	}
@@ -83,7 +83,7 @@ class GoalGorithm_Shortcode_Renderer {
 	/** Expected goals display. */
 	private function render_expected_goals( $p ) {
 		return '<div class="goalgorithm-xg"><div class="goalgorithm-xg-item">'
-			. '<span class="goalgorithm-xg-label">Expected Goals</span>'
+			. '<span class="goalgorithm-xg-label">' . esc_html( GoalGorithm_Translations::get( 'xg' ) ) . '</span>'
 			. '<span class="goalgorithm-xg-value">' . esc_html( $p['home_xg'] ) . '</span>'
 			. '<span class="goalgorithm-xg-separator">-</span>'
 			. '<span class="goalgorithm-xg-value">' . esc_html( $p['away_xg'] ) . '</span>'
@@ -94,9 +94,9 @@ class GoalGorithm_Shortcode_Renderer {
 	private function render_outcome_bar( $p ) {
 		$html  = '<div class="goalgorithm-outcomes">';
 		$html .= '<div class="goalgorithm-outcome-labels">';
-		$html .= '<span>Home ' . esc_html( $p['home_win'] ) . '%</span>';
-		$html .= '<span>Draw ' . esc_html( $p['draw'] ) . '%</span>';
-		$html .= '<span>Away ' . esc_html( $p['away_win'] ) . '%</span>';
+		$html .= '<span>' . esc_html( GoalGorithm_Translations::get( 'home_pct' ) ) . ' ' . esc_html( $p['home_win'] ) . '%</span>';
+		$html .= '<span>' . esc_html( GoalGorithm_Translations::get( 'draw_pct' ) ) . ' ' . esc_html( $p['draw'] ) . '%</span>';
+		$html .= '<span>' . esc_html( GoalGorithm_Translations::get( 'away_pct' ) ) . ' ' . esc_html( $p['away_win'] ) . '%</span>';
 		$html .= '</div>';
 		$html .= '<div class="goalgorithm-outcome-bar">';
 		$html .= '<div class="goalgorithm-bar-home" style="width:' . esc_attr( $p['home_win'] ) . '%"></div>';
@@ -108,11 +108,12 @@ class GoalGorithm_Shortcode_Renderer {
 
 	/** Market probabilities (Over/Under 2.5, BTTS). */
 	private function render_markets( $p ) {
+		$t       = GoalGorithm_Translations::class;
 		$markets = [
-			[ 'Over 2.5',  $p['over_25'] ],
-			[ 'Under 2.5', $p['under_25'] ],
-			[ 'BTTS Yes',  $p['btts_yes'] ],
-			[ 'BTTS No',   $p['btts_no'] ],
+			[ $t::get( 'over_25' ),  $p['over_25'] ],
+			[ $t::get( 'under_25' ), $p['under_25'] ],
+			[ $t::get( 'btts_yes' ), $p['btts_yes'] ],
+			[ $t::get( 'btts_no' ),  $p['btts_no'] ],
 		];
 
 		$html = '<div class="goalgorithm-markets">';
@@ -129,7 +130,7 @@ class GoalGorithm_Shortcode_Renderer {
 	/** Top 3 most likely scores. */
 	private function render_top_scores( $p ) {
 		$html  = '<div class="goalgorithm-top-scores">';
-		$html .= '<div class="goalgorithm-section-title">Most Likely Scores</div>';
+		$html .= '<div class="goalgorithm-section-title">' . esc_html( GoalGorithm_Translations::get( 'top_scores' ) ) . '</div>';
 		foreach ( $p['top_scores'] as $score ) {
 			$pct   = round( $score['prob'] * 100, 1 );
 			$html .= '<div class="goalgorithm-score-item">'
@@ -144,7 +145,7 @@ class GoalGorithm_Shortcode_Renderer {
 	/** 6x6 score probability heatmap grid. */
 	private function render_score_grid( $p ) {
 		$html  = '<div class="goalgorithm-grid-section">';
-		$html .= '<div class="goalgorithm-section-title">Score Probability Grid</div>';
+		$html .= '<div class="goalgorithm-section-title">' . esc_html( GoalGorithm_Translations::get( 'score_grid' ) ) . '</div>';
 		$html .= '<table class="goalgorithm-grid"><thead><tr><th></th>';
 
 		for ( $a = 0; $a <= 5; $a++ ) {

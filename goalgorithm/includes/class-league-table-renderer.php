@@ -55,14 +55,15 @@ class GoalGorithm_League_Table_Renderer {
 
 	/** Render the league prediction table with header and match rows. */
 	private function render_table( $fixtures, $league_data, $avgs, $engine, $league_name ) {
+		$t     = GoalGorithm_Translations::class;
 		$html  = '<div class="gg-league-wrap">';
 		$html .= '<div class="gg-league-header">' . esc_html( $league_name ) . '</div>';
 		$html .= '<table class="gg-table"><thead><tr>';
-		$html .= '<th class="gg-col-time">Thời gian</th>';
-		$html .= '<th class="gg-col-match">Trận đấu</th>';
-		$html .= '<th class="gg-col-handicap">Tỷ lệ</th>';
-		$html .= '<th class="gg-col-score">Dự Đoán</th>';
-		$html .= '<th class="gg-col-pick" colspan="2">Chọn</th>';
+		$html .= '<th class="gg-col-time">' . esc_html( $t::get( 'time' ) ) . '</th>';
+		$html .= '<th class="gg-col-match">' . esc_html( $t::get( 'match' ) ) . '</th>';
+		$html .= '<th class="gg-col-handicap">' . esc_html( $t::get( 'handicap' ) ) . '</th>';
+		$html .= '<th class="gg-col-score">' . esc_html( $t::get( 'prediction' ) ) . '</th>';
+		$html .= '<th class="gg-col-pick" colspan="2">' . esc_html( $t::get( 'pick' ) ) . '</th>';
 		$html .= '</tr></thead><tbody>';
 
 		foreach ( $fixtures as $match ) {
@@ -70,7 +71,7 @@ class GoalGorithm_League_Table_Renderer {
 		}
 
 		$html .= '</tbody></table>';
-		$html .= '<div class="gg-signature">Dự đoán bóng đá AI bởi Tô Hoàng Anh — <a href="https://bongdanet66.com/" target="_blank" rel="noopener">BongdaNET</a></div>';
+		$html .= '<div class="gg-signature">' . esc_html( GoalGorithm_Translations::get( 'signature' ) ) . ' <a href="https://bongdanet66.com/" target="_blank" rel="noopener">BongdaNET</a></div>';
 		$html .= '</div>';
 		return $html;
 	}
@@ -112,7 +113,7 @@ class GoalGorithm_League_Table_Renderer {
 		$html .= '<td class="gg-match">';
 		$html .= '<span class="gg-team' . $hc . '">' . esc_html( $home ) . '</span>';
 		$html .= '<span class="gg-team' . $ac . '">' . esc_html( $away ) . '</span>';
-		$html .= '<span class="gg-draw">Hòa</span>';
+		$html .= '<span class="gg-draw">' . esc_html( GoalGorithm_Translations::get( 'draw' ) ) . '</span>';
 		$html .= '</td>';
 		$html .= '<td class="gg-handicap">' . esc_html( $handicap ) . '</td>';
 		$html .= '<td class="gg-score">' . esc_html( $scr ) . '</td>';
@@ -131,7 +132,7 @@ class GoalGorithm_League_Table_Renderer {
 		}
 		// Positive diff = home stronger → home gives goals (negative handicap)
 		$sign = $line > 0 ? '-' : '+';
-		return 'Chủ ' . $sign . $this->format_quarter( abs( $line ) );
+		return GoalGorithm_Translations::get( 'home' ) . ' ' . $sign . $this->format_quarter( abs( $line ) );
 	}
 
 	/** Calculate Over/Under recommendation string. */
@@ -142,7 +143,7 @@ class GoalGorithm_League_Table_Renderer {
 		if ( $line < 0.5 ) {
 			$line = 0.5;
 		}
-		$type = ( $total > $line ) ? 'Tài' : 'Xỉu';
+		$type = ( $total > $line ) ? GoalGorithm_Translations::get( 'over' ) : GoalGorithm_Translations::get( 'under' );
 		return $type . ' ' . $this->format_quarter( $line );
 	}
 

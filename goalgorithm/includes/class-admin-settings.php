@@ -36,12 +36,26 @@ class GoalGorithm_Admin_Settings {
 			'default'           => 12,
 		] );
 
+		register_setting( self::OPTION_GROUP, 'goalgorithm_language', [
+			'type'              => 'string',
+			'sanitize_callback' => [ $this, 'sanitize_language' ],
+			'default'           => 'en',
+		] );
+
 		add_settings_section( 'goalgorithm_general', 'General Settings', null, self::PAGE_SLUG );
 
 		add_settings_field(
 			'goalgorithm_default_league',
 			'Default League',
 			[ $this, 'render_league_field' ],
+			self::PAGE_SLUG,
+			'goalgorithm_general'
+		);
+
+		add_settings_field(
+			'goalgorithm_language',
+			'Display Language',
+			[ $this, 'render_language_field' ],
 			self::PAGE_SLUG,
 			'goalgorithm_general'
 		);
@@ -190,9 +204,30 @@ class GoalGorithm_Admin_Settings {
 		echo '</tbody></table>';
 	}
 
+	/** Render language dropdown field. */
+	public function render_language_field() {
+		$current   = get_option( 'goalgorithm_language', 'en' );
+		$languages = GoalGorithm_Translations::languages();
+
+		echo '<select name="goalgorithm_language">';
+		foreach ( $languages as $code => $name ) {
+			$selected = selected( $current, $code, false );
+			echo '<option value="' . esc_attr( $code ) . '" ' . $selected . '>'
+				. esc_html( $name ) . '</option>';
+		}
+		echo '</select>';
+		echo '<p class="description">Language for shortcode output (prediction cards and tables).</p>';
+	}
+
 	/** Sanitize league ID against allowed values. */
 	public function sanitize_league( $value ) {
 		$allowed = array_keys( GoalGorithm_Data_Fetcher::LEAGUES );
 		return in_array( $value, $allowed, true ) ? $value : '9';
+	}
+
+	/** Sanitize language code against allowed values. */
+	public function sanitize_language( $value ) {
+		$allowed = array_keys( GoalGorithm_Translations::languages() );
+		return in_array( $value, $allowed, true ) ? $value : 'en';
 	}
 }
