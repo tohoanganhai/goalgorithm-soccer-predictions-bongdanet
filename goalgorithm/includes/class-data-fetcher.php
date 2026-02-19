@@ -100,6 +100,9 @@ class GoalGorithm_Data_Fetcher {
 			return new WP_Error( 'understat_parse_error', 'Could not parse Understat response.' );
 		}
 
+		// Cache fixtures from same API response to avoid duplicate requests
+		$this->cache_fixtures( $league_id, $json['dates'] ?? [] );
+
 		return $this->aggregate_team_stats( $json['teams'] );
 	}
 
@@ -154,6 +157,40 @@ class GoalGorithm_Data_Fetcher {
 		return ( $month >= 8 ) ? $year : $year - 1;
 	}
 
+	/** Cache fixture data from Understat response in a separate transient. */
+	private function cache_fixtures( $league_id, $dates ) {
+		if ( empty( $dates ) ) {
+			return;
+		}
+		$key = 'goalgorithm_fixtures_' . $league_id . '_' . $this->get_current_season();
+		$ttl = (int) get_option( 'goalgorithm_cache_duration', 12 );
+		set_transient( $key, $dates, $ttl * HOUR_IN_SECONDS );
+	}
+
+	/**
+	 * Get league fixtures from cache. Triggers team data fetch if not cached.
+	 *
+	 * @param string $league_id Numeric league ID.
+	 * @return array|WP_Error Fixtures array or error.
+	 */
+	public function get_league_fixtures( $league_id ) {
+		if ( ! isset( self::LEAGUES[ $league_id ] ) ) {
+			return new WP_Error( 'invalid_league', 'Unsupported league ID: ' . $league_id );
+		}
+		$key    = 'goalgorithm_fixtures_' . $league_id . '_' . $this->get_current_season();
+		$cached = get_transient( $key );
+		if ( false !== $cached ) {
+			return $cached;
+		}
+		// Only fetch if team data also not cached (avoids redundant API calls)
+		$team_key = 'goalgorithm_league_' . $league_id . '_' . $this->get_current_season();
+		if ( false === get_transient( $team_key ) ) {
+			$this->get_league_data( $league_id );
+			$cached = get_transient( $key );
+		}
+		return ( false !== $cached ) ? $cached : [];
+	}
+
 	/**
 	 * Calculate league average xG/90 and xGA/90 across all teams.
 	 *
@@ -193,6 +230,8 @@ class GoalGorithm_Data_Fetcher {
 		foreach ( array_keys( self::LEAGUES ) as $id ) {
 			delete_transient( 'goalgorithm_league_' . $id . '_' . $season );
 			delete_transient( 'goalgorithm_league_' . $id . '_' . ( $season - 1 ) );
+			delete_transient( 'goalgorithm_fixtures_' . $id . '_' . $season );
+			delete_transient( 'goalgorithm_fixtures_' . $id . '_' . ( $season - 1 ) );
 		}
 	}
 }

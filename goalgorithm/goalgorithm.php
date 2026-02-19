@@ -3,7 +3,7 @@
  * Plugin Name: GoalGorithm - Soccer Predictions
  * Plugin URI:  https://github.com/goalgorithm
  * Description: xG-based soccer match predictions using Poisson distribution model. Use [goalgorithm] shortcode.
- * Version:     1.1.0
+ * Version:     1.2.0
  * Author:      GoalGorithm
  * License:     GPL v2 or later
  * Text Domain: goalgorithm
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Plugin constants
 if ( ! defined( 'GOALGORITHM_VERSION' ) ) {
-	define( 'GOALGORITHM_VERSION', '1.1.0' );
+	define( 'GOALGORITHM_VERSION', '1.2.0' );
 	define( 'GOALGORITHM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 	define( 'GOALGORITHM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
@@ -24,6 +24,7 @@ if ( ! defined( 'GOALGORITHM_VERSION' ) ) {
 require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-data-fetcher.php';
 require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-prediction-engine.php';
 require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-shortcode-renderer.php';
+require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-league-table-renderer.php';
 require_once GOALGORITHM_PLUGIN_DIR . 'includes/class-admin-settings.php';
 
 /**
@@ -47,16 +48,22 @@ class GoalGorithm {
 		add_action( 'admin_init', [ $this, 'register_settings' ] );
 	}
 
-	/** Register the [goalgorithm] shortcode. */
+	/** Register the [goalgorithm] and [goalgorithm_league] shortcodes. */
 	public function register_shortcode() {
 		$renderer = new GoalGorithm_Shortcode_Renderer();
 		add_shortcode( 'goalgorithm', [ $renderer, 'render' ] );
+
+		$league_renderer = new GoalGorithm_League_Table_Renderer();
+		add_shortcode( 'goalgorithm_league', [ $league_renderer, 'render' ] );
 	}
 
-	/** Enqueue frontend CSS only on pages containing the shortcode. */
+	/** Enqueue frontend CSS only on pages containing plugin shortcodes. */
 	public function enqueue_styles() {
 		global $post;
-		if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'goalgorithm' ) ) {
+		if ( is_a( $post, 'WP_Post' ) && (
+			has_shortcode( $post->post_content, 'goalgorithm' )
+			|| has_shortcode( $post->post_content, 'goalgorithm_league' )
+		) ) {
 			wp_enqueue_style(
 				'goalgorithm-frontend',
 				GOALGORITHM_PLUGIN_URL . 'assets/css/goalgorithm-frontend.css',
