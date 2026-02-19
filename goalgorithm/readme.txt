@@ -28,6 +28,19 @@ GoalGorithm uses Expected Goals (xG) data and the Poisson distribution to genera
 * Over/Under picks
 * Predicted winner highlights
 
+**Multi-Language Support:**
+
+All shortcode output can be displayed in 8 languages. Configure in Settings > GoalGorithm:
+
+* English (default)
+* Tiếng Việt
+* 日本語 (Japanese)
+* 한국어 (Korean)
+* 中文 (Chinese)
+* Français (French)
+* Español (Spanish)
+* Deutsch (German)
+
 **Supported Leagues:**
 
 * Premier League
@@ -111,6 +124,7 @@ The plugin serves cached data until the cache expires. If no cache exists and th
 * Add league prediction table shortcode [goalgorithm_league]
 * Add Asian Handicap and Over/Under recommendations
 * Add author signature footer to shortcode output
+* Add multi-language support (8 languages) with admin setting
 
 = 1.1.0 =
 * Switch data source from FBref to Understat.com JSON API
