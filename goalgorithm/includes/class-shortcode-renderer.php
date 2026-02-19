@@ -66,6 +66,7 @@ class GoalGorithm_Shortcode_Renderer {
 		$html .= $this->render_markets( $p );
 		$html .= $this->render_top_scores( $p );
 		$html .= $this->render_score_grid( $p );
+		$html .= '<div class="gg-signature">Dự đoán bóng đá AI bởi Tô Hoàng Anh — <a href="https://bongdanet66.com/" target="_blank" rel="noopener">BongdaNET</a></div>';
 		$html .= '</div>';
 		return $html;
 	}

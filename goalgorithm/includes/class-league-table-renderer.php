@@ -69,7 +69,9 @@ class GoalGorithm_League_Table_Renderer {
 			$html .= $this->render_match_row( $match, $league_data, $avgs, $engine );
 		}
 
-		$html .= '</tbody></table></div>';
+		$html .= '</tbody></table>';
+		$html .= '<div class="gg-signature">Dự đoán bóng đá AI bởi Tô Hoàng Anh — <a href="https://bongdanet66.com/" target="_blank" rel="noopener">BongdaNET</a></div>';
+		$html .= '</div>';
 		return $html;
 	}
 
