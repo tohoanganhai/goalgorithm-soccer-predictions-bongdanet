@@ -63,7 +63,7 @@ This plugin connects to the following external service:
 
 == Attribution Link ==
 
-Both shortcodes display a small credit line at the bottom of the output linking to [BongdaNET](https://bongdanet66.com/). This link opens in a new tab and is visible to site visitors. It credits the prediction model author and source website.
+Both shortcodes display a small credit line at the bottom linking to [BongdaNET](https://bongdanet66.com/), crediting Tô Hoàng Anh — AI & Data Science Expert and author of the prediction model.
 
 == Installation ==
 
