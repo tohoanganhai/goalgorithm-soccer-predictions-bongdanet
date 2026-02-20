@@ -41,6 +41,8 @@ All shortcode output can be displayed in 8 languages. Configure in Settings > Go
 * Español (Spanish)
 * Deutsch (German)
 
+**Live Demo:** See this prediction model in action at [BongdaNET](https://bongdanet66.com/) — a Vietnamese football analytics site powered by a customized version of GoalGorithm.
+
 **Supported Leagues:**
 
 * Premier League
