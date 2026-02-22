@@ -2,6 +2,8 @@
 
 WordPress plugin that uses Expected Goals (xG) data and Poisson distribution to predict soccer match outcomes via shortcode.
 
+> **Proven in production** — This prediction model is actively used on [BongdaNET](https://bongdanet66.com), a football analytics platform that combines expert analysis with data science to deliver accurate match predictions. BongdaNET also serves as a comprehensive football data hub — offering odds from top bookmakers, live results, fixtures, and standings for leagues worldwide — providing a smart betting experience for punters and football enthusiasts alike.
+
 ## Features
 
 - Fetches xG/xGA data from [Understat.com](https://understat.com) JSON API
@@ -13,6 +15,11 @@ WordPress plugin that uses Expected Goals (xG) data and Poisson distribution to 
 - Top 3 most likely exact scores
 - Admin settings page with cache management
 - Supports 5 leagues: Premier League, La Liga, Serie A, Bundesliga, Ligue 1
+- Multi-language support: English, Vietnamese, Spanish, French, German, Italian, Portuguese, Chinese
+
+## Live Demo
+
+See GoalGorithm predictions in action on [BongdaNET](https://bongdanet66.com) — accurate match predictions powered by xG data, updated daily across Europe's top 5 leagues.
 
 ## Installation
 
