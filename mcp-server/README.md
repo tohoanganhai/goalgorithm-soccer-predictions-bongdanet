@@ -2,6 +2,8 @@
 
 Soccer match predictions using xG data and Poisson distribution, exposed as MCP tools for Claude Desktop/Code.
 
+> **Proven in production** — This prediction model is actively used on [BongdaNET](https://bongdanet66.com), a football analytics platform that combines expert analysis with data science to deliver accurate match predictions. BongdaNET also serves as a comprehensive football data hub — offering odds from top bookmakers, live results, fixtures, and standings for leagues worldwide — providing a smart betting experience for punters and football enthusiasts alike.
+
 ## Install
 
 ```bash
@@ -28,6 +30,35 @@ Add to your Claude Desktop config (`claude_desktop_config.json`):
 }
 ```
 
+## Example Usage
+
+Once configured, just ask Claude naturally:
+
+> **You:** "Predict Arsenal vs Chelsea this weekend"
+
+Claude will call the `predict_match` tool and respond with something like:
+
+> **Claude:** Here's the prediction for **Arsenal vs Chelsea** (Premier League):
+>
+> | Outcome | Probability |
+> |---------|-------------|
+> | Arsenal Win | 52.4% |
+> | Draw | 22.7% |
+> | Chelsea Win | 24.9% |
+>
+> - **Expected Goals:** Arsenal 1.85 — Chelsea 1.23
+> - **Over 2.5 Goals:** 58.3% | **Under 2.5:** 41.7%
+> - **Both Teams to Score:** Yes 52.1% | No 47.9%
+> - **Most Likely Scores:** 1-0 (12.8%), 1-1 (11.2%), 2-1 (10.5%)
+>
+> Arsenal are clear favorites at home with stronger attacking xG.
+
+Other things you can ask:
+
+- *"Show me the La Liga xG table"* — calls `get_league_table`
+- *"Which leagues are available?"* — calls `list_leagues`
+- *"Who's more likely to win, Bayern or Dortmund?"* — calls `predict_match`
+
 ## Tools
 
 ### `predict_match`
@@ -38,7 +69,7 @@ Predict soccer match outcome using xG-based Poisson model.
 predict_match(home_team="Arsenal", away_team="Chelsea", league="EPL")
 ```
 
-Returns win/draw/loss probabilities, over/under 2.5 goals, BTTS, top 3 most likely scores.
+**Returns:** win/draw/loss %, over/under 2.5, BTTS, top 3 scores, expected goals, score matrix.
 
 ### `list_leagues`
 
